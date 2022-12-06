@@ -23,8 +23,6 @@ public:
 	Shape(ShapeConfiguration _params);
 	~Shape() {};
 
-	virtual void Initialization() override {};
-	virtual void Deinitialization() override {};
 	virtual void Draw() override;
 private:
 	ShapeConfiguration m_configuration;

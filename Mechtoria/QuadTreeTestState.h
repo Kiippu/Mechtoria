@@ -9,10 +9,7 @@ class QuadTreeTestState : public IState
 public:
 	QuadTreeTestState(FiniteStateMachine* _parent, GamePlayState* _parentState);
 
-	virtual void Initialization() override {};
-	virtual void Deinitialization() override {};
-
-	virtual void Update() override {};
+	virtual void Update() override;
 	virtual void Draw() override;
 private:
 

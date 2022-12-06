@@ -6,7 +6,6 @@
 #include "InputDevice.h"
 #include "GamePlayState.h"
 #include "CollisionVolume.h"
-#include "Voxel.h"
 
 TopDownState::TopDownState(FiniteStateMachine* _parent, GamePlayState* _parentState)
 	: IState({ node::type::FINITE_STATE_TOPDOWN, IState::StateType::TOP_DOWN, _parent}), m_gamePlayState(_parentState)
@@ -53,8 +52,4 @@ void TopDownState::Initialization()
 	staticNode->addChildNode(collisionVolume_1);
 	m_gamePlayState->AddGameActor(staticNode, node::entity::PAWN_DYNAMIC, GetType(), node::renderLayer::GAME_ACTOR_STATIC);
 
-	//addChildNode(staticNode);
-	//int oo{ 0 };
-	//m_voxelWorld = std::make_unique<VoxelChonk>(VoxelChonk::VoxelChonkConfiguration{});
-	//oo += 43;
 }

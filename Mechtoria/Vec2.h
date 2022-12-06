@@ -1,4 +1,6 @@
 #pragma once
+#include "raylib.h"
+
 template<class T>
 class Vec2
 {
@@ -12,6 +14,8 @@ public:
 	constexpr T GetY() const { return y; };
 	constexpr void SetX(T _x) { x = _x; };
 	constexpr void SetY(T _y) { y = _y; };
+	constexpr const Vector2 AsVector2() { return Vector2{ x,y }; };
+
 
 public:
 	constexpr bool operator==(const Vec2& rhs) const

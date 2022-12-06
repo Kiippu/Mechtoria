@@ -23,8 +23,8 @@ public:
 	Node(const Node& _node) = delete;
 	Node& operator=(const Node& _otherNode) = delete;
 
-	virtual void Initialization() = 0;
-	virtual void Deinitialization() = 0;
+	virtual void Initialization() {};
+	virtual void Deinitialization() {};
 
 	void addChildNode(std::shared_ptr<Node> _node)
 	{
@@ -82,7 +82,7 @@ public:
 class RendableNode
 {
 public:
-	RendableNode(node::renderLayer _renderLayer) 
+	RendableNode(/*node::renderLayer _renderLayer*/)
 	{
 		//s_rendableNodes[_renderLayer].push_back(this);
 	}
@@ -120,7 +120,7 @@ class Visual2DNode : public Node, public  RendableNode
 {
 public:
 	Visual2DNode(node::type _type, node::renderLayer _renderLayer)
-		: Node(_type), RendableNode(_renderLayer) {}
+		: Node(_type) {}
 	virtual void Draw()
 	{
 		auto& nodes = GetChildNodes();
@@ -136,7 +136,7 @@ class Visual2DDynamicNode : public Node, public RendableNode, public UpdateableN
 {
 public:
 	Visual2DDynamicNode(node::type _type, node::renderLayer _renderLayer)
-		: Node(_type), RendableNode(_renderLayer) {};
+		: Node(_type) {};
 	virtual void Update()
 	{
 		auto& nodes = GetChildNodes();

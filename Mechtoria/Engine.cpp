@@ -17,7 +17,6 @@ Engine::Engine(EngineParams _params)
 	assert(!GetWindowHandle()); // A Window exists but we tried to create another here
 	InitWindow(_params.width, _params.height, _params.title.c_str());
 	SetTargetFPS(settings::FPS);
-	m_engineNodes.Initialization();
 	auto stateMachine = std::make_shared<FiniteStateMachine>();
 	stateMachine->AddState(std::make_unique<MainMenuState>(stateMachine.get()));
 	stateMachine->AddState(std::make_unique<GamePlayState>(stateMachine.get()));
@@ -29,7 +28,6 @@ Engine::~Engine() noexcept
 {
 	assert(GetWindowHandle()); // A Window doesn't exist but we tried to close it
 	CloseWindow();
-	m_engineNodes.Deinitialization();
 }
 
 void Engine::Tick()

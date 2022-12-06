@@ -22,9 +22,6 @@ public:
 	GameObjectController(GameObjectControllerConfiguration _params);
 	~GameObjectController() {};
 
-	virtual void Initialization() override {};
-	virtual void Deinitialization() override {};
-
 	virtual void Update() override;
 
 	void SetGameObjectToControl(std::shared_ptr<GameObjectDynamic> _obj);

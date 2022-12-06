@@ -99,12 +99,6 @@
     <ClCompile Include="Node.cpp">
       <Filter>Source Files\Node</Filter>
     </ClCompile>
-    <ClCompile Include="QuadTree.cpp">
-      <Filter>Source Files\Node\DataStructures</Filter>
-    </ClCompile>
-    <ClCompile Include="VoxelChonk.cpp">
-      <Filter>Source Files\Voxel</Filter>
-    </ClCompile>
     <ClCompile Include="QuadTreeTestState.cpp">
       <Filter>Source Files\Node\StateMachine</Filter>
     </ClCompile>
@@ -179,20 +173,11 @@
     <ClInclude Include="Transform.h">
       <Filter>Header Files\DataStructures</Filter>
     </ClInclude>
-    <ClInclude Include="QuadTree.h">
-      <Filter>Header Files\DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="Voxel.h">
-      <Filter>Header Files\Voxel</Filter>
-    </ClInclude>
-    <ClInclude Include="VoxelChonk.h">
-      <Filter>Header Files\Voxel</Filter>
-    </ClInclude>
     <ClInclude Include="QuadTreeV2.h">
       <Filter>Header Files\DataStructures</Filter>
     </ClInclude>
     <ClInclude Include="QuadTreeTestState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Node\StateMachine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

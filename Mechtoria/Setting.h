@@ -1,17 +1,38 @@
 #pragma once
 #include "Vec2.h"
 
+
+namespace voxel
+{
+	enum class DrawType
+	{
+		CUBIC,
+		MARCHING_SQUARES_DEFAULT
+	};
+	enum class Mask : int
+	{
+		NO_VOXEL	= 0,
+		NORTH_WEST	= 1,
+		NORTH_EAST	= 2,
+		SOUTH_WEST	= 4,
+		SOUTH_EAST	= 8
+	};
+}
+
 namespace settings
 {
-	// window settings
+	// Window settings
 	inline constexpr int screenWidth = 800;
 	inline constexpr int screenHeight = 800;
 	inline constexpr int FPS = 60;
-	// Bord settings
+	// Board settings
 	inline constexpr int cellSize = 23;
 	inline constexpr int padding = 2;
 	inline constexpr Vec2<int> boardPosition = {250,70};
 	inline constexpr Vec2<int> boardDimentions = {10,20};
+	// voxel Settings
+	inline constexpr voxel::DrawType voxelType = voxel::DrawType::CUBIC;
+	inline constexpr bool DEBUG_QUADTREE = true;
 
 }
 

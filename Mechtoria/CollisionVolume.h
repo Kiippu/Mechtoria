@@ -22,7 +22,6 @@ public:
 	~CollisionVolume() {};
 
 	virtual void Initialization() override;
-	virtual void Deinitialization() override {};
 	virtual void Draw() override;
 
 	void SetVisible(bool isVisible) { m_debugDraw = isVisible; };

@@ -9,8 +9,6 @@ class EngineNodePool : public DynamicNode
 public:
 	EngineNodePool()
 		: DynamicNode(node::type::ENGINE_POOL) {}
-	virtual void Initialization() override {};
-	virtual void Deinitialization() override {};
 
 	virtual void Update() override {};
 

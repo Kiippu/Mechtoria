@@ -144,7 +144,6 @@
     <ClCompile Include="EngineNodePool.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="Node.cpp" />
-    <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="QuadTreeTestState.cpp" />
     <ClCompile Include="QuadTreeV2.cpp" />
     <ClCompile Include="raylibcpp.cpp" />
@@ -153,7 +152,6 @@
     <ClCompile Include="SideScrollState.cpp" />
     <ClCompile Include="SweepAndPruneCollision.cpp" />
     <ClCompile Include="TopDownState.cpp" />
-    <ClCompile Include="VoxelChonk.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CollisionVolume.h" />
@@ -170,7 +168,6 @@
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="EngineNodePool.h" />
-    <ClInclude Include="QuadTree.h" />
     <ClInclude Include="QuadTreeTestState.h" />
     <ClInclude Include="QuadTreeV2.h" />
     <ClInclude Include="SceneNodePool.h" />
@@ -181,8 +178,6 @@
     <ClInclude Include="TopDownState.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vec2.h" />
-    <ClInclude Include="Voxel.h" />
-    <ClInclude Include="VoxelChonk.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

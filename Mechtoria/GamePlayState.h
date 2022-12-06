@@ -5,6 +5,7 @@
 #include <map>
 #include "GameObjectDynamic.h"
 #include "SweepAndPruneCollision.h"
+#include "QuadTreeV2.h"
 
 class GameObjectController;
 extern std::map<IState::StateType,std::map<node::renderLayer, std::vector<RendableNode*>>> s_rendableNodes;
@@ -17,7 +18,6 @@ public:
 	virtual ~GamePlayState() {};
 
 	virtual void Initialization() override;
-	virtual void Deinitialization() override {};
 
 	virtual void Update() override;
 	virtual void Draw() override;
@@ -30,5 +30,6 @@ private:
 	std::array<std::shared_ptr<GameObjectController>, 4> m_controllers;
 	std::map<node::entity,std::vector<std::shared_ptr<GameObjectDynamic>>> m_gameActors;
 	SweepAndPruneCollision m_collision;
+	std::map<IState::StateType,std::unique_ptr<QuadTreeV2>> m_world;
 };
 

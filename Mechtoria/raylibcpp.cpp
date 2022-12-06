@@ -22,3 +22,17 @@ void raycpp::DrawCircle(Vec2<float> _pos, float _radius, Color _color)
 	assert(_pos.GetY() >= 0 && _pos.GetY() <= GetScreenHeight()); // y is in range
 	DrawCircle((int)_pos.GetX(), (int)_pos.GetY(), _radius, _color);
 }
+
+void raycpp::DrawLineEx(Vec2<float> startPos, Vec2<float> endPos, float thick, Color color)
+{
+	Vector2 start{ startPos.GetX(), startPos.GetY() };
+	Vector2 end{ endPos.GetX(), endPos.GetY() };
+	DrawLineEx(start, end, thick, color);
+}
+
+bool raycpp::CheckCollisionPointRec(Vec2<float> point, Quad rec)
+{
+	Vector2 topLeft = { point.GetX(), point.GetY() };
+	Rectangle rect{ topLeft.x, topLeft.y, rec.dimentions.GetX(), rec.dimentions.GetY() };
+	return CheckCollisionPointRec(topLeft, rect);
+}

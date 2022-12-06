@@ -13,11 +13,6 @@ void FiniteStateMachine::Update()
 	{
 		if (auto update = std::dynamic_pointer_cast<UpdateableNode>(node.second))
 		{
-			if (!node.second->IsInitialized())
-			{
-				node.second->Initialization();
-				node.second->SetInitialized();
-			}
 			update->Update();
 		}
 	}

@@ -44,9 +44,6 @@ class FiniteStateMachine : public Visual2DDynamicNode
 public:
 	FiniteStateMachine();
 
-	virtual void Initialization() override {};
-	virtual void Deinitialization() override {};
-
 	virtual void Update() override;
 
 	virtual void Draw() override;

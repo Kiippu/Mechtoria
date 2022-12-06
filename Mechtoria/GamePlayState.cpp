@@ -20,7 +20,7 @@ void GamePlayState::Initialization()
 	stateMachine->AddState(std::make_unique<TopDownState>(stateMachine.get(), this));
 	stateMachine->AddState(std::make_unique<SideScrollState>(stateMachine.get(), this));
 	stateMachine->AddState(std::make_unique<QuadTreeTestState>(stateMachine.get(), this));
-	stateMachine->SetState(StateType::TOP_DOWN);
+	stateMachine->SetState(StateType::QUADTREE);
 	addChildNode(stateMachine);
 
 	GameObjectController::GameObjectControllerConfiguration configCont{
@@ -30,6 +30,9 @@ void GamePlayState::Initialization()
 
 	m_controllers.fill(std::shared_ptr<GameObjectController>());
 	m_controllers[0] = std::make_shared<GameObjectController>(configCont);
+
+	Quad bounds = { Vec2<float>{0.f,0.f},Vec2<float>{(float)settings::screenWidth,(float)settings::screenWidth} };
+	m_world[StateType::SIDE_SCROLL] = std::make_unique<QuadTreeV2>(bounds, 4, 5);
 }
 
 void GamePlayState::Update()
