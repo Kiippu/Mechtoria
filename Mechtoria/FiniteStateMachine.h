@@ -1,23 +1,24 @@
 #pragma once
 #include "Node.h"
 #include <vector>
+#include "Setting.h"
 
 class FiniteStateMachine;
 class IState : public Visual2DDynamicNode
 {
 public:
-	enum class StateType
+	/*enum class StateType
 	{
 		MAIN_MENU,
 		TOP_DOWN,
 		SIDE_SCROLL,
 		GAMEPLAY,
 		QUADTREE
-	};
+	};*/
 	struct IStateConfiguration
 	{
 		node::type nodeType;
-		StateType type;
+		state::type type;
 		FiniteStateMachine* stateMachine = nullptr;
 		IState* parentState = nullptr;
 
@@ -29,12 +30,12 @@ public:
 	IState(IState&& _node) = default;
 	IState& operator=(IState&& _otherNode) = default;*/
 
-	StateType GetType() const { return m_type; }
+	state::type GetType() const { return m_type; }
 	FiniteStateMachine* GetFiniteStateMachineParent() const { return m_parent; };
 	const IStateConfiguration& GetConfiguration() const { return m_configuration; }
 
 private:
-	StateType m_type;
+	state::type m_type;
 	FiniteStateMachine* m_parent;
 	IStateConfiguration m_configuration;
 };
@@ -48,7 +49,7 @@ public:
 
 	virtual void Draw() override;
 
-	void SetState(IState::StateType _type) { m_stateType = _type; };
+	void SetState(state::type _type) { m_stateType = _type; };
 	IState* GetActiveState() const { return m_currentState; };
 
 	void AddState(std::unique_ptr<IState> _state);
@@ -56,6 +57,6 @@ public:
 
 private:
 	IState* m_currentState;
-	IState::StateType m_stateType;
+	state::type m_stateType;
 	std::vector<std::unique_ptr<IState>> m_childrenStates;
 };

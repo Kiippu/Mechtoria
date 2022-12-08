@@ -4,10 +4,11 @@
 #include <vector>
 #include "Setting.h"
 #include "Transform.h"
+//#include "GameObjectDynamic.h"
+//#include "GamePlayState.h"
 
-
-class RendableNode;
 class GameObjectDynamic;
+class RendableNode;
 class Node;
 //extern std::map<node::renderLayer, std::vector<RendableNode*>> s_rendableNodes;
 extern std::vector<std::weak_ptr<GameObjectDynamic>> s_collisionNodes;
@@ -23,7 +24,16 @@ public:
 	Node(const Node& _node) = delete;
 	Node& operator=(const Node& _otherNode) = delete;
 
-	virtual void Initialization() {};
+	virtual void Initialization() {
+		for (auto node : m_childNodes)
+		{
+			if (!node.second->IsInitialized())
+			{
+				node.second->Initialization();
+				node.second->SetInitialized();
+			}
+		}
+	};
 	virtual void Deinitialization() {};
 
 	void addChildNode(std::shared_ptr<Node> _node)
@@ -82,15 +92,15 @@ public:
 class RendableNode
 {
 public:
-	RendableNode(/*node::renderLayer _renderLayer*/)
-	{
-		//s_rendableNodes[_renderLayer].push_back(this);
-	}
+	RendableNode(node::renderLayer _renderLayer, state::type stateType);
 	virtual void Draw() = 0;
 	Transform2D GetWorldTransform() { return m_transform; };
 	virtual void SetWorldTransform(Transform2D _transform) { m_transform = _transform; };
+	node::renderLayer GetRenderLayer() const { return m_renderLayer; };
+
 private:
 	Transform2D m_transform;
+	node::renderLayer m_renderLayer;
 };
 
 class DynamicNode : public Node, public  UpdateableNode
@@ -119,8 +129,10 @@ public:
 class Visual2DNode : public Node, public  RendableNode
 {
 public:
-	Visual2DNode(node::type _type, node::renderLayer _renderLayer)
-		: Node(_type) {}
+	Visual2DNode(node::type _type, node::renderLayer _renderLayer, state::type stateType)
+		: Node(_type), 
+		RendableNode(_renderLayer, stateType)
+	{}
 	virtual void Draw()
 	{
 		auto& nodes = GetChildNodes();
@@ -135,8 +147,10 @@ public:
 class Visual2DDynamicNode : public Node, public RendableNode, public UpdateableNode
 {
 public:
-	Visual2DDynamicNode(node::type _type, node::renderLayer _renderLayer)
-		: Node(_type) {};
+	Visual2DDynamicNode(node::type _type, node::renderLayer _renderLayer, state::type stateType)
+		: Node(_type), 
+		RendableNode(_renderLayer, stateType)
+	{};
 	virtual void Update()
 	{
 		auto& nodes = GetChildNodes();

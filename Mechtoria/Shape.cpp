@@ -1,8 +1,9 @@
 #include "Shape.h"
 #include "Setting.h"
+#
 
 Shape::Shape(ShapeConfiguration _params)
-	: m_configuration(_params), Visual2DDynamicNode(node::type::VISUAL_2D_SHAPE, node::renderLayer::FOREGROUND)
+	: m_configuration(_params), Visual2DDynamicNode(node::type::VISUAL_2D_SHAPE, node::renderLayer::FOREGROUND, _params.state)
 {
 
 }

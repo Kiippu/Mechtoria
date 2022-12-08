@@ -7,9 +7,10 @@
 #include <vector>
 #include "raylibcpp.h"
 #include "Shape.h"
+#include "Quad.h"
 
 QuadTreeTestState::QuadTreeTestState(FiniteStateMachine* _parent, GamePlayState* _parentState)
-	: IState({ node::type::FINITE_STATE_QUADTREE, IState::StateType::QUADTREE, _parent }), 
+	: IState({ node::type::FINITE_STATE_QUADTREE, state::type::QUADTREE, _parent }), 
 	m_gamePlayState(_parentState)
 {
 

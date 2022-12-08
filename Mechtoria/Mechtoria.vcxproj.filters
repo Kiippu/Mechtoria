@@ -105,6 +105,12 @@
     <ClCompile Include="QuadTreeV2.cpp">
       <Filter>Source Files\Node\DataStructures</Filter>
     </ClCompile>
+    <ClCompile Include="QuadTreeV3.cpp">
+      <Filter>Source Files\Node\DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -178,6 +184,15 @@
     </ClInclude>
     <ClInclude Include="QuadTreeTestState.h">
       <Filter>Header Files\Node\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="Quad.h">
+      <Filter>Source Files\Node\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadTreeV3.h">
+      <Filter>Header Files\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionHandler.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

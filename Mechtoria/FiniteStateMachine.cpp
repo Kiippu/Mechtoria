@@ -1,7 +1,7 @@
 #include "FiniteStateMachine.h"
 
 FiniteStateMachine::FiniteStateMachine()
-	: Visual2DDynamicNode(node::type::FINITE_STATE_MACHINE, node::renderLayer::SKIP_NODE), m_currentState(nullptr), m_stateType(IState::StateType::GAMEPLAY)
+	: Visual2DDynamicNode(node::type::FINITE_STATE_MACHINE, node::renderLayer::SKIP_NODE, state::type::SKIP), m_currentState(nullptr), m_stateType(state::type::GAMEPLAY)
 {
 }
 
@@ -43,6 +43,6 @@ void FiniteStateMachine::AddState(std::unique_ptr<IState> _state)
 }
 
 IState::IState(IStateConfiguration _params)
-	:  Visual2DDynamicNode(_params.nodeType, node::renderLayer::SKIP_NODE), m_type(_params.type), m_parent(_params.stateMachine), m_configuration(_params)
+	:  Visual2DDynamicNode(_params.nodeType, node::renderLayer::SKIP_NODE, _params.type), m_type(_params.type), m_parent(_params.stateMachine), m_configuration(_params)
 {
 }

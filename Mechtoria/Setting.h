@@ -1,6 +1,18 @@
 #pragma once
 #include "Vec2.h"
 
+namespace state 
+{
+	enum class type
+	{
+		MAIN_MENU,
+		TOP_DOWN,
+		SIDE_SCROLL,
+		GAMEPLAY,
+		QUADTREE,
+		SKIP
+	};
+}
 
 namespace voxel
 {

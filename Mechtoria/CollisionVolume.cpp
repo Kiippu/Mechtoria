@@ -5,8 +5,7 @@
 
 CollisionVolume::CollisionVolume(CollisionVolumeConfiguration _params)
 	: m_configuration(_params), 
-	Visual2DDynamicNode(node::type::COLLISION_2D_SHAPE, 
-	node::renderLayer::DEBUG_NON_GUI), 
+	Visual2DDynamicNode(node::type::COLLISION_2D_SHAPE, node::renderLayer::DEBUG_NON_GUI, _params.renderState),
 	m_debugDraw(true)
 {
 }
@@ -15,6 +14,10 @@ CollisionVolume::CollisionVolume(CollisionVolumeConfiguration _params)
 void CollisionVolume::Initialization()
 {
 	s_collisionNodes.push_back(std::dynamic_pointer_cast<GameObjectDynamic>(GetParent()->shared_from_this()));
+	if (auto parentTransform = std::dynamic_pointer_cast<RendableNode>(GetParent()->shared_from_this()) )
+	{
+		SetWorldTransform(parentTransform->GetWorldTransform());
+	}
 }
 
 void CollisionVolume::Draw()
@@ -38,5 +41,13 @@ void CollisionVolume::Draw()
 				break;
 			}
 		}
+	}
+}
+
+void CollisionVolume::Update()
+{
+	if (auto parentTransform = std::dynamic_pointer_cast<RendableNode>(GetParent()->shared_from_this()) )
+	{
+		SetWorldTransform(parentTransform->GetWorldTransform());
 	}
 }

@@ -27,56 +27,46 @@ public:
 	virtual void Execute(GameObjectDynamic* _obj) = 0;
 };
 
+/// 
+///  MOVEMENT COMMANDS
+/// 
 class MoveLeftCommand : public ICommand
 {
 public:
-	virtual void Execute(GameObjectDynamic* _obj)
-	{
-		auto trans = _obj->GetWorldTransform();
-		auto pos = trans.GetPosition();
-		//Transform2D trans{ { pos.GetX() + 1, pos.GetY() } ,trans.GetRotation(), trans.GetScale() };
-		trans.SetPosition({ pos.GetX() - 1, pos.GetY() });
-		_obj->SetWorldTransform(trans);
-	}
+	virtual void Execute(GameObjectDynamic* _obj);
 };
 
 class MoveRightCommand : public ICommand
 {
 public:
-	virtual void Execute(GameObjectDynamic* _obj)
-	{
-		auto trans = _obj->GetWorldTransform();
-		auto pos = trans.GetPosition();
-		//Transform2D trans{ { pos.GetX() + 1, pos.GetY() } ,trans.GetRotation(), trans.GetScale() };
-		trans.SetPosition({ pos.GetX() + 1, pos.GetY() });
-		_obj->SetWorldTransform(trans);
-	}
+	virtual void Execute(GameObjectDynamic* _obj);
 };
 
 class MoveUpCommand : public ICommand
 {
 public:
-	virtual void Execute(GameObjectDynamic* _obj)
-	{
-		auto trans = _obj->GetWorldTransform();
-		auto pos = trans.GetPosition();
-		//Transform2D trans{ { pos.GetX() + 1, pos.GetY() } ,trans.GetRotation(), trans.GetScale() };
-		trans.SetPosition({ pos.GetX(), pos.GetY() -1 });
-		_obj->SetWorldTransform(trans);
-	}
+	virtual void Execute(GameObjectDynamic* _obj);
 };
 
 class MoveDownCommand : public ICommand
 {
 public:
-	virtual void Execute(GameObjectDynamic* _obj)
-	{
-		auto trans = _obj->GetWorldTransform();
-		auto pos = trans.GetPosition();
-		//Transform2D trans{ { pos.GetX() + 1, pos.GetY() } ,trans.GetRotation(), trans.GetScale() };
-		trans.SetPosition({ pos.GetX(), pos.GetY() +1 });
-		_obj->SetWorldTransform(trans);
-	}
+	virtual void Execute(GameObjectDynamic* _obj);
+};
+
+/// 
+///  VOXEL COMMANDS
+/// 
+class InsertVoxelCommand : public ICommand
+{
+public:
+	virtual void Execute(GameObjectDynamic* _obj);
+};
+
+class RemoveVoxelCommand : public ICommand
+{
+public:
+	virtual void Execute(GameObjectDynamic* _obj);
 };
 
 

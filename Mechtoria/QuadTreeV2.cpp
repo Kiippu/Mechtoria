@@ -124,18 +124,19 @@ void QuadTreeV2::RemoveVoxels(Quad range, int depth)
     }
 }
 
-void QuadTreeV2::Subdivide()
+void QuadTreeV2::Subdivide(bool isVoxel)
 {
     const Vec2<float>& TOP_LEFT = m_boundry.topLeft;
     Vec2<float> HALF_DIMS = m_boundry.dimentions * .5f;
     Vec2<float> TOP_MID = TOP_LEFT + Vec2<float>{HALF_DIMS.GetX(), 0.f};
     Vec2<float> MID_LEFT = TOP_LEFT + Vec2<float>{0.f, HALF_DIMS.GetY()};
     Vec2<float> MID_MID = TOP_LEFT + HALF_DIMS;
+    node::renderLayer layer = isVoxel ? node::renderLayer::VOXEL : node::renderLayer::SKIP_NODE;
 
-    m_northWest = std::make_unique<QuadTreeV2>(Quad{ TOP_LEFT,  HALF_DIMS }, m_capacity, m_voxelDepth);
-	m_northEast = std::make_unique<QuadTreeV2>(Quad{ TOP_MID,   HALF_DIMS }, m_capacity, m_voxelDepth);
-	m_southWest = std::make_unique<QuadTreeV2>(Quad{ MID_LEFT,  HALF_DIMS }, m_capacity, m_voxelDepth);
-	m_southEast = std::make_unique<QuadTreeV2>(Quad{ MID_MID,   HALF_DIMS }, m_capacity, m_voxelDepth);
+    m_northWest = std::make_unique<QuadTreeV2>(Quad{ TOP_LEFT,  HALF_DIMS }, m_capacity, m_voxelDepth, layer);
+	m_northEast = std::make_unique<QuadTreeV2>(Quad{ TOP_MID,   HALF_DIMS }, m_capacity, m_voxelDepth, layer);
+	m_southWest = std::make_unique<QuadTreeV2>(Quad{ MID_LEFT,  HALF_DIMS }, m_capacity, m_voxelDepth, layer);
+	m_southEast = std::make_unique<QuadTreeV2>(Quad{ MID_MID,   HALF_DIMS }, m_capacity, m_voxelDepth, layer);
     m_isDivided = true;
 }
 

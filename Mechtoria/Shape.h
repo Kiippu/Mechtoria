@@ -19,6 +19,7 @@ public:
 		Color colour = BLUE;
 		float lineWidth = 1;
 		std::weak_ptr<RendableNode> parent;
+		state::type state = state::type::SKIP;
 	};
 	Shape(ShapeConfiguration _params);
 	~Shape() {};

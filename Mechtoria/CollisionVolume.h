@@ -17,17 +17,20 @@ public:
 		Color onCollisionColour = RED;
 		Color onNoCollisionColour = BLACK;
 		float borderWidth = 5;
+		state::type renderState = state::type::SKIP;
 	};
 	CollisionVolume(CollisionVolumeConfiguration _params);
 	~CollisionVolume() {};
 
 	virtual void Initialization() override;
 	virtual void Draw() override;
+	virtual void Update() override;
 
 	void SetVisible(bool isVisible) { m_debugDraw = isVisible; };
 	bool GetVisible() { return m_debugDraw; };
 
 	void SetCollisionPair(std::weak_ptr<GameObjectDynamic> _pairs) { m_collisionPairs.push_back(_pairs); };
+	void SetCollisionPair(std::vector<GameObjectDynamic*> _pairs) { m_collisionPairsRaw = _pairs; };
 	const std::vector<std::weak_ptr<GameObjectDynamic>>& GetCollisionPairs() const { return m_collisionPairs; }
 	void ClearCollisionPairs() { m_collisionPairs.clear(); }
 
@@ -37,5 +40,6 @@ private:
 	CollisionVolumeConfiguration m_configuration;
 	bool m_debugDraw;
 	std::vector<std::weak_ptr<GameObjectDynamic>> m_collisionPairs;
+	std::vector<GameObjectDynamic*> m_collisionPairsRaw;
 };
 

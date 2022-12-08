@@ -20,7 +20,7 @@ Engine::Engine(EngineParams _params)
 	auto stateMachine = std::make_shared<FiniteStateMachine>();
 	stateMachine->AddState(std::make_unique<MainMenuState>(stateMachine.get()));
 	stateMachine->AddState(std::make_unique<GamePlayState>(stateMachine.get()));
-	stateMachine->SetState(IState::StateType::GAMEPLAY);
+	stateMachine->SetState(state::type::GAMEPLAY);
 	m_engineNodes.addChildNode(stateMachine);
 }
 
@@ -51,7 +51,7 @@ void Engine::Draw()
 		if (!state)
 			return;
 		auto kkk = state->GetType();
-		if (state->GetType() == IState::StateType::GAMEPLAY)
+		if (state->GetType() == state::type::GAMEPLAY)
 		{
 			GamePlayState* gameState = (GamePlayState*)state;
 

@@ -130,6 +130,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CollisionHandler.cpp" />
     <ClCompile Include="CollisionVolume.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="Engine.cpp" />
@@ -146,6 +147,7 @@
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="QuadTreeTestState.cpp" />
     <ClCompile Include="QuadTreeV2.cpp" />
+    <ClCompile Include="QuadTreeV3.cpp" />
     <ClCompile Include="raylibcpp.cpp" />
     <ClCompile Include="SceneNodePool.cpp" />
     <ClCompile Include="Shape.cpp" />
@@ -154,6 +156,7 @@
     <ClCompile Include="TopDownState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CollisionHandler.h" />
     <ClInclude Include="CollisionVolume.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="CommandBindings.h" />
@@ -168,8 +171,10 @@
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="EngineNodePool.h" />
+    <ClInclude Include="Quad.h" />
     <ClInclude Include="QuadTreeTestState.h" />
     <ClInclude Include="QuadTreeV2.h" />
+    <ClInclude Include="QuadTreeV3.h" />
     <ClInclude Include="SceneNodePool.h" />
     <ClInclude Include="Setting.h" />
     <ClInclude Include="Shape.h" />
