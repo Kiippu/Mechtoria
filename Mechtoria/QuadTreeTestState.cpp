@@ -14,9 +14,9 @@ QuadTreeTestState::QuadTreeTestState(FiniteStateMachine* _parent, GamePlayState*
 	m_gamePlayState(_parentState)
 {
 
-	Quad bounds = { Vec2<float>{0.f,0.f},Vec2<float>{(float)settings::screenWidth,(float)settings::screenWidth} };
+	/*Quad bounds = { Vec2<float>{0.f,0.f},Vec2<float>{(float)settings::screenWidth,(float)settings::screenWidth} };
 	int capacity = 1;
-	m_quadTree = std::make_unique<QuadTreeV2>(bounds, capacity, 5);
+	m_quadTree = std::make_unique<QuadTreeV2>(bounds, capacity, 5);*/
 
 	//srand((unsigned int)time(NULL));
 	/*for (size_t i = 0; i < 50; i++)

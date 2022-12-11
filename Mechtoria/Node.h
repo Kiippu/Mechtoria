@@ -2,6 +2,7 @@
 #include <map>
 #include <memory>
 #include <vector>
+#include <string>
 #include "Setting.h"
 #include "Transform.h"
 //#include "GameObjectDynamic.h"
@@ -12,7 +13,7 @@ class RendableNode;
 class Node;
 //extern std::map<node::renderLayer, std::vector<RendableNode*>> s_rendableNodes;
 extern std::vector<std::weak_ptr<GameObjectDynamic>> s_collisionNodes;
-static int Unique_ID = 0;
+extern int Unique_ID;
 
 class Node : public std::enable_shared_from_this<Node>
 {
@@ -68,7 +69,12 @@ public:
 		return m_childNodes;
 	};
 
-	node::type GetNodeType() const { return m_type; }
+	void SetName(std::string name) { m_name = name; };
+	std::string GetName() const { return m_name; };
+
+	node::type GetNodeType() const { return m_type; };
+
+	const int& GetUniqueID()const { return m_uniqueID; };
 
 	void SetInitialized() { m_isInitialized = true; };
 	bool IsInitialized() { return m_isInitialized; }
@@ -81,6 +87,7 @@ private:
 	const node::type m_type;
 	bool m_isInitialized;
 	Node* m_parent;
+	std::string m_name;
 };
 
 class UpdateableNode

@@ -1,6 +1,9 @@
 #pragma once
 #include "Node.h"
 #include "Vec2.h"
+
+class QuadTreeV3;
+
 class CollisionVolume : public Visual2DDynamicNode
 {
 
@@ -29,10 +32,18 @@ public:
 	void SetVisible(bool isVisible) { m_debugDraw = isVisible; };
 	bool GetVisible() { return m_debugDraw; };
 
-	void SetCollisionPair(std::weak_ptr<GameObjectDynamic> _pairs) { m_collisionPairs.push_back(_pairs); };
-	void SetCollisionPair(std::vector<GameObjectDynamic*> _pairs) { m_collisionPairsRaw = _pairs; };
-	const std::vector<std::weak_ptr<GameObjectDynamic>>& GetCollisionPairs() const { return m_collisionPairs; }
-	void ClearCollisionPairs() { m_collisionPairs.clear(); }
+	//void SetCollisionPair(std::weak_ptr<GameObjectDynamic> _pairs) { m_collisionPairs.push_back(_pairs); };
+	void SetCollisionPair(std::vector<GameObjectDynamic*> _pairs);
+	void AddCollisionPair(GameObjectDynamic* obj);
+
+	void SetCollisionVoxel(std::vector<QuadTreeV3*> voxels);
+
+	//const std::vector<std::weak_ptr<GameObjectDynamic>>& GetCollisionPairs() const { return m_collisionPairs; }
+	const std::vector<GameObjectDynamic*>& GetCollisionPairsRaw() const { return m_collisionPairsRaw; }
+	const std::vector<QuadTreeV3*>& GetCollisionVoxels() const { return m_collisionVoxels; }
+
+
+	void ClearCollisionPairs();
 
 	const CollisionVolumeConfiguration& GetConfirgutrtion() { return m_configuration; };
 	void SetCollisionDims(Vec2<float> _dims) { m_configuration.dimentions = _dims; };
@@ -41,5 +52,6 @@ private:
 	bool m_debugDraw;
 	std::vector<std::weak_ptr<GameObjectDynamic>> m_collisionPairs;
 	std::vector<GameObjectDynamic*> m_collisionPairsRaw;
+	std::vector<QuadTreeV3*> m_collisionVoxels;
 };
 

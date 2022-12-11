@@ -31,10 +31,11 @@ void GamePlayState::Initialization()
 	m_controllers.fill(std::shared_ptr<GameObjectController>());
 	m_controllers[0] = std::make_shared<GameObjectController>(configCont);
 
-	Quad bounds = { Vec2<float>{0.f,0.f},Vec2<float>{(float)settings::screenWidth,(float)settings::screenWidth} };
+	Vec2<float> topLeft = Vec2<float>{ -(float)settings::screenWidth,-(float)settings::screenWidth };
+	Quad bounds = { topLeft,Vec2<float>{(float)settings::screenWidth*3,(float)settings::screenWidth*3} };
 	//m_world[StateType::SIDE_SCROLL] = std::make_unique<QuadTreeV2>(bounds, 4, 5);
 	const int capacity = 1;
-	const int depth = 5;
+	const int depth = 7;
 	m_worldV2[state::type::SIDE_SCROLL] = std::make_unique<QuadTreeV3>(bounds, capacity, state::type::SIDE_SCROLL, depth);
 
 }
@@ -66,6 +67,7 @@ void GamePlayState::Update()
 		// Remove all stale actors from quadtree
 		for (auto& world : m_worldV2)
 			world.second->ClearInserts();
+		m_collision.ClearCollisions();
 		//m_worldV2[FSM->GetActiveState()->GetType()]->ClearInserts();
 		// add current actors to collision tree
 		for (auto& actorList : m_gameActors)
@@ -82,11 +84,13 @@ void GamePlayState::Update()
 		// collison update
 		m_collision.Update(m_worldV2[FSM->GetActiveState()->GetType()].get());
 
+		/// DEBUG 
+		/// draw voxels at position
 		auto pos = GetMousePosition();
 		auto controller = GetGameObjectControllers()[0];
 		auto camera = controller->GetControllerCamera();
 		auto worldPos = GetScreenToWorld2D( pos, camera);
-		Quad quad{ {worldPos.x - 25.f, worldPos.y - 25.f}, {50.f,50.f} };
+		Quad quad{ {worldPos.x - 5.f, worldPos.y - 5.f}, {10.f,10.f} };
 		auto midPoint = quad.topLeft - quad.getMidPoint();
 		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
 			m_worldV2[FSM->GetActiveState()->GetType()]->InsertVoxels(quad);

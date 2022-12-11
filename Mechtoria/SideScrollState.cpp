@@ -5,6 +5,9 @@
 #include "InputDevice.h"
 #include "GamePlayState.h"
 
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
+
 
 SideScrollState::SideScrollState(FiniteStateMachine* _parent, GamePlayState* _parentState)
 	: IState({ node::type::FINITE_STATE_SIDESCROLL, state::type::SIDE_SCROLL}), m_gamePlayState(_parentState)
@@ -16,11 +19,12 @@ void SideScrollState::Initialization()
 	const float height = (float)GetScreenHeight();
 	const float width = (float)GetScreenWidth();
 
-
-	for (size_t i = 1; i < 11; i++)
+	srand((unsigned int)time(NULL));
+	const size_t randomActorCount = 31;
+	for (size_t i = 1; i < randomActorCount; i++)
 	{
-		auto w = (width / 11.f) * i;
-		auto h = (height / 11.f) * i;
+		auto w = (float)(rand() % settings::screenWidth);//(width / 2.f) - 150.f;
+		auto h = (float)(rand() % settings::screenWidth);//(height / 2.f) + 50.f;
 		auto staticNode = std::make_shared<GameObjectDynamic>(this, node::renderLayer::GAME_ACTOR_STATIC, node::entity::PAWN_STATIC);
 		staticNode->SetWorldTransform(Transform2D{ Vec2<float>{ w,h}, 0.f, 1.f });
 		CollisionVolume::CollisionVolumeConfiguration configStatic
@@ -39,6 +43,7 @@ void SideScrollState::Initialization()
 
 	auto node = std::make_shared<GameObjectDynamic>( this, node::renderLayer::GAME_ACTOR_PLAYER, node::entity::PAWN_DYNAMIC);
 	node->SetWorldTransform(Transform2D{ Vec2<float>{(width / 2.f) - 50.f,(height / 2.f) - 50.f}, 0.f, 1.f });
+	node->SetName("PlayerGameObj");
 
 	GameObjectController::GameObjectControllerConfiguration configCont{
 		network::controllerType::LOCAL, node, nullptr,
@@ -47,13 +52,14 @@ void SideScrollState::Initialization()
 	CollisionVolume::CollisionVolumeConfiguration configVol
 	{
 		CollisionVolume::VolumeType::rectangle,
-		{ 100.f,100.f },
+		{ 70.f,70.f },
 		RED,
 		BLACK,
 		5,
 		state::type::SIDE_SCROLL
 	};
 	auto collisionVolume = std::make_shared<CollisionVolume>(configVol);
+	collisionVolume->SetName("PlayerCollision");
 	node->addChildNode(collisionVolume);
 	m_gamePlayState->GetGameObjectControllers()[0]->SetGameObjectToControl(node);
 	m_gamePlayState->AddGameActor(node);
@@ -80,7 +86,7 @@ void SideScrollState::Draw()
 	std::vector<GameObjectDynamic*> pointsFound;
 
 	auto pos = GetMousePosition();
-	Quad quad{ {pos.x - 25.f, pos.y - 25.f}, {50.f,50.f} };
+	Quad quad{ {pos.x - 5.f, pos.y - 5.f}, {10.f,10.f} };
 	auto midPoint = quad.topLeft - quad.getMidPoint();
 	//m_quadTree->Query(quad, pointsFound);
 	/*if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
@@ -96,5 +102,5 @@ void SideScrollState::Draw()
 	{
 		raycpp::DrawCircle(p, 5.f, GREEN);
 	}*/
-	DrawRectangleLinesEx({ quad.topLeft.GetX(), quad.topLeft.GetY(), quad.dimentions.GetX(), quad.dimentions.GetY() }, 5, RED);
+	DrawRectangleLinesEx({ quad.topLeft.GetX(), quad.topLeft.GetY(), quad.dimentions.GetX(), quad.dimentions.GetY() }, 5, ORANGE);
 }

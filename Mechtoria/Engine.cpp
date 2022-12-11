@@ -50,42 +50,26 @@ void Engine::Draw()
 		const auto state = FSM->GetActiveState();
 		if (!state)
 			return;
-		auto kkk = state->GetType();
 		if (state->GetType() == state::type::GAMEPLAY)
 		{
 			GamePlayState* gameState = (GamePlayState*)state;
 
 			gameState->Draw();
-
-			/*for (auto& v : s_rendableNodes)
-			{
-				std::sort(v.second.begin(), v.second.end(), [](RendableNode* _left, RendableNode* _right) {
-					return _left->GetWorldTransform().GetPosition().GetY() < _right->GetWorldTransform().GetPosition().GetY();
-				});
-			}
-			for (auto controller : gameState->GetGameObjectControllers())
-			{
-				if (!controller)
-					continue;
-				BeginMode2D(controller->GetControllerCamera());
-				{
-					for (auto node : s_rendableNodes[node::renderLayer::BACKGROUND])
-						node->Draw();
-					for (auto node : s_rendableNodes[node::renderLayer::VOXEL])
-						node->Draw();
-					for (auto node : s_rendableNodes[node::renderLayer::GAME_ACTOR_STATIC])
-						node->Draw();
-					for (auto node : s_rendableNodes[node::renderLayer::GAME_ACTOR_PLAYER])
-						node->Draw();
-					for (auto node : s_rendableNodes[node::renderLayer::FOREGROUND])
-						node->Draw();
-					for (auto node : s_rendableNodes[node::renderLayer::DEBUG_NON_GUI])
-						node->Draw();
-				}
-				EndMode2D();
-			}*/
 		}
 		EndDrawing();
+	}
+	//clear nulls fron render list
+	for (auto& stateMap : s_rendableNodes)
+	{
+		for (auto &renderablesList : stateMap.second)
+		{
+			auto& drawList = renderablesList.second;
+			for (int i = drawList.size()-1; i >= 0; --i)
+			{
+				if (!drawList[i])
+					drawList.erase(drawList.begin() + i);
+			}
+		}
 	}
 }
 

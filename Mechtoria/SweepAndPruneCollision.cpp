@@ -37,10 +37,10 @@ void SweepAndPruneCollision::UpdateCollisionPairs()
 			{
 				if (DetectCollision(nodeA, nodeB))
 				{
-					if(const auto collisionNode = std::dynamic_pointer_cast<CollisionVolume>(nodeA->GetChildNode(node::type::COLLISION_2D_SHAPE).lock()))
+					/*if(const auto collisionNode = std::dynamic_pointer_cast<CollisionVolume>(nodeA->GetChildNode(node::type::COLLISION_2D_SHAPE).lock()))
 						collisionNode->SetCollisionPair(nodeB);
 					if (const auto collisionNode = std::dynamic_pointer_cast<CollisionVolume>(nodeB->GetChildNode(node::type::COLLISION_2D_SHAPE).lock()))
-						collisionNode->SetCollisionPair(nodeA);
+						collisionNode->SetCollisionPair(nodeA);*/
 				}
 			}
 		}
