@@ -4,6 +4,7 @@
 #include "QuadTreeTestState.h"
 #include "GameObjectController.h"
 #include "InputDevice.h"
+#include "WorldBuilder.h"
 
 std::map < state::type, 
 	std::map<node::renderLayer, 
@@ -31,22 +32,24 @@ void GamePlayState::Initialization()
 	m_controllers.fill(std::shared_ptr<GameObjectController>());
 	m_controllers[0] = std::make_shared<GameObjectController>(configCont);
 
-	Vec2<float> topLeft = Vec2<float>{ -(float)settings::screenWidth,-(float)settings::screenWidth };
-	Quad bounds = { topLeft,Vec2<float>{(float)settings::screenWidth*3,(float)settings::screenWidth*3} };
+	const float quadDimSqu = 1024.f;
+	Vec2<float> topLeft = Vec2<float>{ -quadDimSqu/2,-quadDimSqu/2 };
+	Quad bounds = { topLeft,Vec2<float>{quadDimSqu,quadDimSqu} };
 	//m_world[StateType::SIDE_SCROLL] = std::make_unique<QuadTreeV2>(bounds, 4, 5);
 	const int capacity = 1;
-	const int depth = 7;
+	const int depth = 6;
 	m_worldV2[state::type::SIDE_SCROLL] = std::make_unique<QuadTreeV3>(bounds, capacity, state::type::SIDE_SCROLL, depth);
 
+	worldCreator::FlatSurfaceWorld(m_worldV2[state::type::SIDE_SCROLL].get());
 }
 
 void GamePlayState::Update()
 {
+	// base update
+	IState::Update();
 	// init all actors in world
 	for (auto& actors : m_gameActors)
 		InitActors(actors.second);
-	// base update
-	IState::Update();
 	// controller update
 	for (auto& controller : m_controllers)
 		if(controller)

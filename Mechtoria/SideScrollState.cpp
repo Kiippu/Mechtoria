@@ -4,6 +4,7 @@
 #include "CollisionVolume.h"
 #include "InputDevice.h"
 #include "GamePlayState.h"
+#include "PlayerActor.h"
 
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
@@ -19,53 +20,37 @@ void SideScrollState::Initialization()
 	const float height = (float)GetScreenHeight();
 	const float width = (float)GetScreenWidth();
 
-	srand((unsigned int)time(NULL));
-	const size_t randomActorCount = 31;
-	for (size_t i = 1; i < randomActorCount; i++)
-	{
-		auto w = (float)(rand() % settings::screenWidth);//(width / 2.f) - 150.f;
-		auto h = (float)(rand() % settings::screenWidth);//(height / 2.f) + 50.f;
-		auto staticNode = std::make_shared<GameObjectDynamic>(this, node::renderLayer::GAME_ACTOR_STATIC, node::entity::PAWN_STATIC);
-		staticNode->SetWorldTransform(Transform2D{ Vec2<float>{ w,h}, 0.f, 1.f });
-		CollisionVolume::CollisionVolumeConfiguration configStatic
-		{
-			CollisionVolume::VolumeType::rectangle,
-			{ 50.f,50.f },
-			RED,
-			DARKBLUE,
-			5,
-			state::type::SIDE_SCROLL
-		};
-		auto collisionVol = std::make_shared<CollisionVolume>(configStatic);
-		staticNode->addChildNode(collisionVol);
-		m_gamePlayState->AddGameActor(staticNode);
-	}
+	//srand((unsigned int)time(NULL));
+	//const size_t randomActorCount = 31;
+	//for (size_t i = 1; i < randomActorCount; i++)
+	//{
+	//	auto w = (float)(rand() % settings::screenWidth);//(width / 2.f) - 150.f;
+	//	auto h = (float)(rand() % settings::screenWidth);//(height / 2.f) + 50.f;
+	//	auto staticNode = std::make_shared<GameObjectDynamic>(this, node::renderLayer::GAME_ACTOR_STATIC, node::entity::PAWN_STATIC);
+	//	staticNode->SetWorldTransform(Transform2D{ Vec2<float>{ w,h}, 0.f, 1.f });
+	//	CollisionVolume::CollisionVolumeConfiguration configStatic
+	//	{
+	//		CollisionVolume::VolumeType::rectangle,
+	//		{ 50.f,50.f },
+	//		RED,
+	//		DARKBLUE,
+	//		5,
+	//		state::type::SIDE_SCROLL
+	//	};
+	//	auto collisionVol = std::make_shared<CollisionVolume>(configStatic);
+	//	staticNode->addChildNode(collisionVol);
+	//	m_gamePlayState->AddGameActor(staticNode);
+	//}
 
-	auto node = std::make_shared<GameObjectDynamic>( this, node::renderLayer::GAME_ACTOR_PLAYER, node::entity::PAWN_DYNAMIC);
-	node->SetWorldTransform(Transform2D{ Vec2<float>{(width / 2.f) - 50.f,(height / 2.f) - 50.f}, 0.f, 1.f });
+	auto node = std::make_shared<PlayerActor>( this, node::renderLayer::GAME_ACTOR_PLAYER, node::entity::PAWN_DYNAMIC);
+	node->SetWorldTransform(Transform2D{ Vec2<float>{-50.f,-150.f}, 0.f, 1.f });
 	node->SetName("PlayerGameObj");
 
-	GameObjectController::GameObjectControllerConfiguration configCont{
-		network::controllerType::LOCAL, node, nullptr,
-		std::make_shared<KeyboardDevice>(InputDevice::InputDeviceConfiguration{})
-	};
-	CollisionVolume::CollisionVolumeConfiguration configVol
-	{
-		CollisionVolume::VolumeType::rectangle,
-		{ 70.f,70.f },
-		RED,
-		BLACK,
-		5,
-		state::type::SIDE_SCROLL
-	};
-	auto collisionVolume = std::make_shared<CollisionVolume>(configVol);
-	collisionVolume->SetName("PlayerCollision");
-	node->addChildNode(collisionVolume);
-	m_gamePlayState->GetGameObjectControllers()[0]->SetGameObjectToControl(node);
-	m_gamePlayState->AddGameActor(node);
+	m_gamePlayState->GetGameObjectControllers()[0]->SetGameObjectToControl(std::dynamic_pointer_cast<GameObjectDynamic>(node));
+	m_gamePlayState->AddGameActor(std::dynamic_pointer_cast<GameObjectDynamic>(node));
 
-	Quad bounds = { Vec2<float>{0.f,0.f},Vec2<float>{(float)settings::screenWidth,(float)settings::screenWidth} };
-	int capacity = 1;
+	//Quad bounds = { Vec2<float>{0.f,0.f},Vec2<float>{(float)settings::screenWidth,(float)settings::screenWidth} };
+	//int capacity = 1;
 	/*m_quadTree = std::make_unique<QuadTreeV3>(bounds, capacity, 5);
 
 

@@ -93,9 +93,6 @@
     <ClCompile Include="SweepAndPruneCollision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CollisionVolume.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Node.cpp">
       <Filter>Source Files\Node</Filter>
     </ClCompile>
@@ -108,7 +105,19 @@
     <ClCompile Include="QuadTreeV3.cpp">
       <Filter>Source Files\Node\DataStructures</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsHandler.cpp">
+      <Filter>Source Files\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerActor.cpp">
+      <Filter>Source Files\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionVolume.cpp">
+      <Filter>Source Files\Node</Filter>
+    </ClCompile>
     <ClCompile Include="CollisionHandler.cpp">
+      <Filter>Source Files\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldBuilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -170,9 +179,6 @@
     <ClInclude Include="SweepAndPruneCollision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionVolume.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Vec2.h">
       <Filter>Header Files\DataStructures</Filter>
     </ClInclude>
@@ -191,7 +197,19 @@
     <ClInclude Include="QuadTreeV3.h">
       <Filter>Header Files\DataStructures</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicsHandler.h">
+      <Filter>Header Files\Node</Filter>
+    </ClInclude>
     <ClInclude Include="CollisionHandler.h">
+      <Filter>Header Files\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionVolume.h">
+      <Filter>Header Files\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerActor.h">
+      <Filter>Header Files\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

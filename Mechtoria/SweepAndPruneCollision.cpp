@@ -65,7 +65,7 @@ std::vector<std::vector<std::weak_ptr<GameObjectDynamic>>> SweepAndPruneCollisio
 				{
 					auto maxB = nodeB->GetWorldTransform().GetPosition().GetX();
 					if (const auto collisionNodeB = std::dynamic_pointer_cast<CollisionVolume>(nodeB->GetChildNode(node::type::COLLISION_2D_SHAPE).lock()))
-						maxB += collisionNodeB->GetConfirgutrtion().dimentions.GetX();
+						maxB += collisionNodeB->GetConfiguration().dimentions.GetX();
 					const auto minA = nodeA->GetWorldTransform().GetPosition().GetX();
 					if (minA > maxB) {
 						//cout << " object is poped " << activeList[j]->name << endl;
@@ -110,12 +110,12 @@ bool SweepAndPruneCollision::DetectCollision(std::shared_ptr<GameObjectDynamic> 
 	// NodeA
 	const auto topLeftA = _nodeA->GetWorldTransform().GetPosition();
 	const auto collisionNodeA = std::dynamic_pointer_cast<CollisionVolume>(_nodeA->GetChildNode(node::type::COLLISION_2D_SHAPE).lock());
-	const auto dimentionsA = collisionNodeA->GetConfirgutrtion().dimentions;
+	const auto dimentionsA = collisionNodeA->GetConfiguration().dimentions;
 	const auto bottonRightA = topLeftA + dimentionsA;
 	// NodeB
 	const auto topLeftB = _nodeB->GetWorldTransform().GetPosition();
 	const auto collisionNodeB = std::dynamic_pointer_cast<CollisionVolume>(_nodeB->GetChildNode(node::type::COLLISION_2D_SHAPE).lock());
-	const auto dimentionsB = collisionNodeB->GetConfirgutrtion().dimentions;
+	const auto dimentionsB = collisionNodeB->GetConfiguration().dimentions;
 	const auto bottonRightB = topLeftB + dimentionsB;
 
 	// test collisions

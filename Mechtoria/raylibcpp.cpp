@@ -1,11 +1,12 @@
 #include "raylibcpp.h"
 #include <assert.h>
+#include <cmath>
 
 void raycpp::DrawRectangle(Vec2<float> _position, Vec2<float> _dims, Color _colour)
 {
 	//assert(_position.GetX() >= 0 && _position.GetX() < GetScreenWidth()); // x is in range
 	//assert(_position.GetY() >= 0 && _position.GetY() < GetScreenHeight()); // y is in range
-	DrawRectangle((int)_position.GetX(), (int)_position.GetY(), (int)_dims.GetX(), (int)_dims.GetY(), _colour);
+	DrawRectangle((int)std::round(_position.GetX()), (int)std::round(_position.GetY()), (int)std::round(_dims.GetX()), (int)std::round(_dims.GetY()), _colour);
 }
 
 void raycpp::DrawRectangleLinesEx(Vec2<float> _pos, Vec2<float> _dims, float _lineThickness, Color _color)

@@ -26,6 +26,7 @@ public:
 	~Transform2D() = default;
 
 	Vec2<float> GetPosition() const { return m_position; };
+	Vec2<float>* GetPositionPtr() { return &m_position; };
 	Vector2 GetPosition_RayLib() const { return { m_position.GetX(), m_position.GetY()}; };
 	void SetPosition(Vec2<float> _pos) { m_position = _pos; };
 

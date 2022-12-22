@@ -1,6 +1,7 @@
 #pragma once
 #include "Node.h"
 #include "Vec2.h"
+#include "Quad.h"
 
 class QuadTreeV3;
 
@@ -42,10 +43,13 @@ public:
 	const std::vector<GameObjectDynamic*>& GetCollisionPairsRaw() const { return m_collisionPairsRaw; }
 	const std::vector<QuadTreeV3*>& GetCollisionVoxels() const { return m_collisionVoxels; }
 
+	const Quad* GetBlockingCollisionQuad(physics::directionBlock side);
+	// return flag of collsions hit
+	const int TestBlockingCollision(const Quad& quad);
 
 	void ClearCollisionPairs();
 
-	const CollisionVolumeConfiguration& GetConfirgutrtion() { return m_configuration; };
+	const CollisionVolumeConfiguration& GetConfiguration() { return m_configuration; };
 	void SetCollisionDims(Vec2<float> _dims) { m_configuration.dimentions = _dims; };
 private:
 	CollisionVolumeConfiguration m_configuration;
@@ -53,5 +57,9 @@ private:
 	std::vector<std::weak_ptr<GameObjectDynamic>> m_collisionPairs;
 	std::vector<GameObjectDynamic*> m_collisionPairsRaw;
 	std::vector<QuadTreeV3*> m_collisionVoxels;
+	std::map<physics::directionBlock, Quad> m_blockingCollision;
+
+private:
+	void DrawBlockingCollision(physics::directionBlock side, const int& flag);
 };
 

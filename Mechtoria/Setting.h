@@ -1,6 +1,23 @@
 #pragma once
 #include "Vec2.h"
 
+namespace physics 
+{
+	enum class component
+	{
+		GRAVITY,
+		VOXEL
+	};
+	enum class directionBlock : int
+	{
+		NO_DIRECTION = 0,
+		NORTH = 1,
+		EAST = 2,
+		SOUTH = 4,
+		WEST = 8
+	};
+}
+
 namespace state 
 {
 	enum class type
@@ -44,7 +61,14 @@ namespace settings
 	inline constexpr Vec2<int> boardDimentions = {10,20};
 	// voxel Settings
 	inline constexpr voxel::DrawType voxelType = voxel::DrawType::CUBIC;
-	inline constexpr bool DEBUG_QUADTREE = true;
+	inline constexpr bool DEBUG_QUADTREE = false;
+	//Physics
+	namespace physics
+	{
+		inline constexpr Vec2<float> gravityVec{ 0.f,2.f };
+		inline constexpr Vec2<float> inputMaxVec{ 1.f,1.f };
+		inline constexpr Vec2<float> inputMinVec{ -1.f,-1.f };
+	}
 
 }
 
@@ -69,13 +93,15 @@ namespace node
 		ENGINE_POOL,
 		CONTROLLER,
 		INPUTHANDLER,
+		PHYSICSHANDLER,
 		FINITE_STATE_MACHINE,
 		FINITE_STATE_TOPDOWN,
 		FINITE_STATE_GAMEPLAY,
 		FINITE_STATE_MAINMENU,
 		FINITE_STATE_SIDESCROLL,
 		FINITE_STATE_QUADTREE,
-		VOXEL_CHONK
+		VOXEL_CHONK,
+		PLAYER_ACTOR
 	};
 
 	enum class entity {

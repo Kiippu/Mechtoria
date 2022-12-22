@@ -145,6 +145,8 @@
     <ClCompile Include="EngineNodePool.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="PhysicsHandler.cpp" />
+    <ClCompile Include="PlayerActor.cpp" />
     <ClCompile Include="QuadTreeTestState.cpp" />
     <ClCompile Include="QuadTreeV2.cpp" />
     <ClCompile Include="QuadTreeV3.cpp" />
@@ -154,6 +156,7 @@
     <ClCompile Include="SideScrollState.cpp" />
     <ClCompile Include="SweepAndPruneCollision.cpp" />
     <ClCompile Include="TopDownState.cpp" />
+    <ClCompile Include="WorldBuilder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CollisionHandler.h" />
@@ -171,6 +174,8 @@
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="EngineNodePool.h" />
+    <ClInclude Include="PhysicsHandler.h" />
+    <ClInclude Include="PlayerActor.h" />
     <ClInclude Include="Quad.h" />
     <ClInclude Include="QuadTreeTestState.h" />
     <ClInclude Include="QuadTreeV2.h" />
@@ -183,6 +188,7 @@
     <ClInclude Include="TopDownState.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vec2.h" />
+    <ClInclude Include="WorldBuilder.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

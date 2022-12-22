@@ -64,7 +64,7 @@ void Engine::Draw()
 		for (auto &renderablesList : stateMap.second)
 		{
 			auto& drawList = renderablesList.second;
-			for (int i = drawList.size()-1; i >= 0; --i)
+			for (int i = (int)drawList.size()-1; i >= 0; --i)
 			{
 				if (!drawList[i])
 					drawList.erase(drawList.begin() + i);
