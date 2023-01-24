@@ -17,7 +17,7 @@ void PhysicsHandler::Update()
     float deltaTime = GetFrameTime();
     //Vec2<float> force{0.f,0.f};
     // apply gravity
-    m_velocity += settings::physics::gravityVec * deltaTime;
+    //m_velocity += settings::physics::gravityVec * deltaTime;
 
     //actor collision
     const auto ActorList = GetParentCollisionVolume()->GetCollisionPairsRaw();

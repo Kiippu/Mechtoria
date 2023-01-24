@@ -71,7 +71,8 @@ void SideScrollState::Draw()
 	std::vector<GameObjectDynamic*> pointsFound;
 
 	auto pos = GetMousePosition();
-	Quad quad{ {pos.x - 5.f, pos.y - 5.f}, {10.f,10.f} };
+	//Quad quad{ {pos.x - 5.f, pos.y - 5.f}, {10.f,10.f} };
+	Quad quad{ {pos.x - 25.f, pos.y - 25.f}, {50.f,50.f} };
 	auto midPoint = quad.topLeft - quad.getMidPoint();
 	//m_quadTree->Query(quad, pointsFound);
 	/*if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))

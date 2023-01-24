@@ -154,6 +154,7 @@
     <ClCompile Include="SceneNodePool.cpp" />
     <ClCompile Include="Shape.cpp" />
     <ClCompile Include="SideScrollState.cpp" />
+    <ClCompile Include="SimplexNoise.cpp" />
     <ClCompile Include="SweepAndPruneCollision.cpp" />
     <ClCompile Include="TopDownState.cpp" />
     <ClCompile Include="WorldBuilder.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="Setting.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="SideScrollState.h" />
+    <ClInclude Include="SimplexNoise.h" />
     <ClInclude Include="SweepAndPruneCollision.h" />
     <ClInclude Include="TopDownState.h" />
     <ClInclude Include="Transform.h" />

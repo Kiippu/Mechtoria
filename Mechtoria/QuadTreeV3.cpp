@@ -160,6 +160,10 @@ void QuadTreeV3::InsertVoxels(Quad range, int depth)
             if (raycpp::CheckCollisionPointRec(m_boundry.bottomRight, range))
                 m_voxelState |= (int)voxel::Mask::SOUTH_EAST;
         }
+        if (AreChildrenActive())
+        {
+            m_voxelState = 0xf;
+        }
     }
 }
 
@@ -172,10 +176,36 @@ void QuadTreeV3::RemoveVoxels(Quad range, int depth)
     {
         if (depth < m_voxelDepth)
         {
-            if (m_northEast) m_northEast->RemoveVoxels(range, depth);
-            if (m_northWest) m_northWest->RemoveVoxels(range, depth);
-            if (m_southEast) m_southEast->RemoveVoxels(range, depth);
-            if (m_southWest) m_southWest->RemoveVoxels(range, depth);
+            if (m_voxelState == 0xf)
+            {
+                m_voxelState = m_voxelState;
+                Subdivide(false);
+                m_northEast->m_voxelState = 0xf;
+                m_northWest->m_voxelState = 0xf;
+                m_southEast->m_voxelState = 0xf;
+                m_southWest->m_voxelState = 0xf;
+            }
+            if (m_northEast) {
+                m_northEast->RemoveVoxels(range, depth);
+                if (!m_northEast->AreChildrenActive())
+                    m_voxelState &= ~(int)voxel::Mask::NORTH_EAST;
+            }
+            if (m_northWest) {
+                m_northWest->RemoveVoxels(range, depth);
+                if (!m_northWest->AreChildrenActive())
+                    m_voxelState &= ~(int)voxel::Mask::NORTH_WEST;
+            }
+            if (m_southEast) {
+                m_southEast->RemoveVoxels(range, depth);
+                if (!m_southEast->AreChildrenActive())
+                    m_voxelState &= ~(int)voxel::Mask::SOUTH_EAST;
+            }
+            if (m_southWest) {
+                m_southWest->RemoveVoxels(range, depth);
+                if (!m_southWest->AreChildrenActive())
+                    m_voxelState &= ~(int)voxel::Mask::SOUTH_WEST;
+            }
+            
         }
         else
         {
@@ -190,9 +220,18 @@ void QuadTreeV3::RemoveVoxels(Quad range, int depth)
             if (raycpp::CheckCollisionPointRec(southEast, range))
                 m_voxelState &= ~(int)voxel::Mask::SOUTH_EAST;
         }
-        // TODO: not pruning currect tiles needs rework
-        //PruneTree();
     }
+}
+
+bool QuadTreeV3::AreChildrenActive() const
+{
+    return (
+        m_northEast && m_northWest && m_southEast && m_southWest &&
+        m_northEast->m_voxelState == 0xf &&
+        m_northWest->m_voxelState == 0xf &&
+        m_southEast->m_voxelState == 0xf &&
+        m_southWest->m_voxelState == 0xf
+        );
 }
 
 void QuadTreeV3::Subdivide(bool isVoxel)
@@ -213,7 +252,7 @@ void QuadTreeV3::Subdivide(bool isVoxel)
 
 void QuadTreeV3::DrawDebugQuad()
 {
-    raycpp::DrawRectangleLinesEx(m_boundry.topLeft, m_boundry.dimentions, 1.f, BLACK);
+    raycpp::DrawRectangleLinesEx(m_boundry.topLeft, m_boundry.dimentions, 3.f, BLACK);
     //for (auto& obj : m_points)
     //{
     //    if (const auto collisionNode = std::dynamic_pointer_cast<CollisionVolume>(obj->GetChildNode(node::type::COLLISION_2D_SHAPE).lock()))
@@ -229,9 +268,9 @@ void QuadTreeV3::DrawDebugQuad()
 
 void QuadTreeV3::DrawVoxels()
 {
-    if (m_voxelState)
+    if (m_voxelState != (int)voxel::Mask::NO_VOXEL)
     {
-        if (settings::voxelType == voxel::DrawType::CUBIC)
+        if ( m_voxelState == 0xf || ( GetRenderLayer() == node::renderLayer::VOXEL && m_voxelState))
         {
             raycpp::DrawRectangle(m_boundry.topLeft, m_boundry.dimentions, DARKGREEN);
         }

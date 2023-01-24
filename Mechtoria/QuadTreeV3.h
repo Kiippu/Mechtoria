@@ -34,7 +34,7 @@ public:
 	//void ActivateVoxel(state::type state);
 	//void DeactivateVoxel();
 	const Quad& GetBounds() const { return m_boundry; };
-
+	bool AreChildrenActive() const;
 
 
 private:

@@ -32,15 +32,17 @@ void GamePlayState::Initialization()
 	m_controllers.fill(std::shared_ptr<GameObjectController>());
 	m_controllers[0] = std::make_shared<GameObjectController>(configCont);
 
-	const float quadDimSqu = 1024.f;
+	const float quadDimSqu = 16384.f;
 	Vec2<float> topLeft = Vec2<float>{ -quadDimSqu/2,-quadDimSqu/2 };
 	Quad bounds = { topLeft,Vec2<float>{quadDimSqu,quadDimSqu} };
 	//m_world[StateType::SIDE_SCROLL] = std::make_unique<QuadTreeV2>(bounds, 4, 5);
 	const int capacity = 1;
-	const int depth = 6;
+	const int depth = 9;
 	m_worldV2[state::type::SIDE_SCROLL] = std::make_unique<QuadTreeV3>(bounds, capacity, state::type::SIDE_SCROLL, depth);
 
-	worldCreator::FlatSurfaceWorld(m_worldV2[state::type::SIDE_SCROLL].get());
+	//worldCreator::FlatSurfaceWorld(m_worldV2[state::type::SIDE_SCROLL].get());
+	//worldCreator::SimpleNoise2DSurfaceWorld(m_worldV2[state::type::SIDE_SCROLL].get());
+	worldCreator::FractalNoise2DSurfaceWorld(m_worldV2[state::type::SIDE_SCROLL].get());
 }
 
 void GamePlayState::Update()
@@ -93,7 +95,7 @@ void GamePlayState::Update()
 		auto controller = GetGameObjectControllers()[0];
 		auto camera = controller->GetControllerCamera();
 		auto worldPos = GetScreenToWorld2D( pos, camera);
-		Quad quad{ {worldPos.x - 5.f, worldPos.y - 5.f}, {10.f,10.f} };
+		Quad quad{ {worldPos.x - 50.f, worldPos.y - 50.f}, {100.f,100.f} };
 		auto midPoint = quad.topLeft - quad.getMidPoint();
 		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
 			m_worldV2[FSM->GetActiveState()->GetType()]->InsertVoxels(quad);
@@ -116,6 +118,8 @@ void GamePlayState::Draw()
 			auto& nodeList = s_rendableNodes[state->GetType()];
 			for (auto& v : nodeList)
 			{
+				if (v.first == node::renderLayer::VOXEL)
+					continue;
 				std::sort(v.second.begin(), v.second.end(), [](RendableNode* _left, RendableNode* _right) {
 					return _left->GetWorldTransform().GetPosition().GetY() < _right->GetWorldTransform().GetPosition().GetY();
 				});

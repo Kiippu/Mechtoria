@@ -51,8 +51,8 @@ namespace voxel
 namespace settings
 {
 	// Window settings
-	inline constexpr int screenWidth = 800;
-	inline constexpr int screenHeight = 800;
+	inline constexpr int screenWidth = 1920;
+	inline constexpr int screenHeight = 1080;
 	inline constexpr int FPS = 60;
 	// Board settings
 	inline constexpr int cellSize = 23;

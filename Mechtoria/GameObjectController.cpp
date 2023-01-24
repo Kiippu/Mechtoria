@@ -12,7 +12,7 @@ GameObjectController::GameObjectController(GameObjectControllerConfiguration _pa
 {
 	m_camera.offset = { (GetRenderWidth() / 2.0f)-50, (GetRenderHeight() / 2.0f) -50 };
 	m_camera.rotation = 0.0f;
-	m_camera.zoom = 1.0f;
+	m_camera.zoom = 0.30f;
 }
 
 void GameObjectController::Update()
