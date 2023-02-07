@@ -10,9 +10,10 @@ GameObjectController::GameObjectController(GameObjectControllerConfiguration _pa
 	m_inputHandler(m_inputDevice),
 	m_camera({0})
 {
-	m_camera.offset = { (GetRenderWidth() / 2.0f)-50, (GetRenderHeight() / 2.0f) -50 };
+	//m_camera.offset = { (GetRenderWidth() / 2.0f)-50, (GetRenderHeight() / 2.0f) -50 };
+	m_camera.offset = { 0, 0 };
 	m_camera.rotation = 0.0f;
-	m_camera.zoom = 0.30f;
+	m_camera.zoom = 1.f;
 }
 
 void GameObjectController::Update()
@@ -24,7 +25,8 @@ void GameObjectController::Update()
 		command->Execute(m_configuration.gameObjectOwner.get());
 	}
 
-	m_camera.target = m_configuration.gameObjectOwner->GetWorldTransform().GetPosition_RayLib();
+	// set camera to a game object
+	//m_camera.target = m_configuration.gameObjectOwner->GetWorldTransform().GetPosition_RayLib();
 }
 
 

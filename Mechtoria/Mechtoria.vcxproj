@@ -130,6 +130,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AIActor.cpp" />
     <ClCompile Include="CollisionHandler.cpp" />
     <ClCompile Include="CollisionVolume.cpp" />
     <ClCompile Include="Command.cpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="QuadTreeV2.cpp" />
     <ClCompile Include="QuadTreeV3.cpp" />
     <ClCompile Include="raylibcpp.cpp" />
+    <ClCompile Include="RTSState.cpp" />
     <ClCompile Include="SceneNodePool.cpp" />
     <ClCompile Include="Shape.cpp" />
     <ClCompile Include="SideScrollState.cpp" />
@@ -160,6 +162,7 @@
     <ClCompile Include="WorldBuilder.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AIActor.h" />
     <ClInclude Include="CollisionHandler.h" />
     <ClInclude Include="CollisionVolume.h" />
     <ClInclude Include="Command.h" />
@@ -181,6 +184,7 @@
     <ClInclude Include="QuadTreeTestState.h" />
     <ClInclude Include="QuadTreeV2.h" />
     <ClInclude Include="QuadTreeV3.h" />
+    <ClInclude Include="RTSState.h" />
     <ClInclude Include="SceneNodePool.h" />
     <ClInclude Include="Setting.h" />
     <ClInclude Include="Shape.h" />

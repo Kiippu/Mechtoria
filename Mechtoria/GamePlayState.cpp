@@ -2,6 +2,7 @@
 #include "SideScrollState.h"
 #include "TopDownState.h"
 #include "QuadTreeTestState.h"
+#include "RTSState.h"
 #include "GameObjectController.h"
 #include "InputDevice.h"
 #include "WorldBuilder.h"
@@ -21,7 +22,8 @@ void GamePlayState::Initialization()
 	stateMachine->AddState(std::make_unique<TopDownState>(stateMachine.get(), this));
 	stateMachine->AddState(std::make_unique<SideScrollState>(stateMachine.get(), this));
 	stateMachine->AddState(std::make_unique<QuadTreeTestState>(stateMachine.get(), this));
-	stateMachine->SetState(state::type::SIDE_SCROLL);
+	stateMachine->AddState(std::make_unique<RTSState>(stateMachine.get(), this));
+	stateMachine->SetState(state::type::RTS);
 	addChildNode(stateMachine);
 
 	GameObjectController::GameObjectControllerConfiguration configCont{
@@ -32,17 +34,19 @@ void GamePlayState::Initialization()
 	m_controllers.fill(std::shared_ptr<GameObjectController>());
 	m_controllers[0] = std::make_shared<GameObjectController>(configCont);
 
-	const float quadDimSqu = 16384.f;
-	Vec2<float> topLeft = Vec2<float>{ -quadDimSqu/2,-quadDimSqu/2 };
+	const float quadDimSqu = 512.f;
+	//Vec2<float> topLeft = Vec2<float>{ -quadDimSqu/2,-quadDimSqu/2 };
+	Vec2<float> topLeft = Vec2<float>{ 0.f,0.f };
 	Quad bounds = { topLeft,Vec2<float>{quadDimSqu,quadDimSqu} };
 	//m_world[StateType::SIDE_SCROLL] = std::make_unique<QuadTreeV2>(bounds, 4, 5);
 	const int capacity = 1;
-	const int depth = 9;
-	m_worldV2[state::type::SIDE_SCROLL] = std::make_unique<QuadTreeV3>(bounds, capacity, state::type::SIDE_SCROLL, depth);
+	const int depth = 5;
+	//m_worldV2[state::type::SIDE_SCROLL] = std::make_unique<QuadTreeV3>(bounds, capacity, state::type::SIDE_SCROLL, depth);
+	m_worldV2[state::type::RTS] = std::make_unique<QuadTreeV3>(bounds, capacity, state::type::RTS, depth);
 
 	//worldCreator::FlatSurfaceWorld(m_worldV2[state::type::SIDE_SCROLL].get());
 	//worldCreator::SimpleNoise2DSurfaceWorld(m_worldV2[state::type::SIDE_SCROLL].get());
-	worldCreator::FractalNoise2DSurfaceWorld(m_worldV2[state::type::SIDE_SCROLL].get());
+	//worldCreator::FractalNoise2DSurfaceWorld(m_worldV2[state::type::SIDE_SCROLL].get());
 }
 
 void GamePlayState::Update()
@@ -97,11 +101,12 @@ void GamePlayState::Update()
 		auto worldPos = GetScreenToWorld2D( pos, camera);
 		Quad quad{ {worldPos.x - 50.f, worldPos.y - 50.f}, {100.f,100.f} };
 		auto midPoint = quad.topLeft - quad.getMidPoint();
-		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
-			m_worldV2[FSM->GetActiveState()->GetType()]->InsertVoxels(quad);
+		
+		//if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+			//m_worldV2[FSM->GetActiveState()->GetType()]->InsertVoxels(quad);
 		//m_worldV2[FSM->GetActiveState()->GetType()]->Draw();
-		if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
-			m_worldV2[FSM->GetActiveState()->GetType()]->RemoveVoxels(quad);
+		//if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
+			//m_worldV2[FSM->GetActiveState()->GetType()]->RemoveVoxels(quad);
 	}
 
 

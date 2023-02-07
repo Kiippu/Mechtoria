@@ -25,6 +25,7 @@ namespace state
 		MAIN_MENU,
 		TOP_DOWN,
 		SIDE_SCROLL,
+		RTS,
 		GAMEPLAY,
 		QUADTREE,
 		SKIP
@@ -51,8 +52,8 @@ namespace voxel
 namespace settings
 {
 	// Window settings
-	inline constexpr int screenWidth = 1920;
-	inline constexpr int screenHeight = 1080;
+	inline constexpr int screenWidth = 512;
+	inline constexpr int screenHeight = 512;
 	inline constexpr int FPS = 60;
 	// Board settings
 	inline constexpr int cellSize = 23;
@@ -99,6 +100,7 @@ namespace node
 		FINITE_STATE_GAMEPLAY,
 		FINITE_STATE_MAINMENU,
 		FINITE_STATE_SIDESCROLL,
+		FINITE_STATE_RTS,
 		FINITE_STATE_QUADTREE,
 		VOXEL_CHONK,
 		PLAYER_ACTOR

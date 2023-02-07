@@ -123,6 +123,12 @@
     <ClCompile Include="SimplexNoise.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RTSState.cpp">
+      <Filter>Source Files\Node\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="AIActor.cpp">
+      <Filter>Source Files\Node</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -216,6 +222,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SimplexNoise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RTSState.h">
+      <Filter>Header Files\Node\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="AIActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
